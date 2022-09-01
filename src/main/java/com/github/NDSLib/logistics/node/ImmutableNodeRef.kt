@@ -1,7 +1,6 @@
 package com.github.NDSLib.logistics.node
 
-open class ImmutableNodeRef(private val toNode: Node) : NodeRef {
-    override fun getNode(): Node {
-        return toNode
-    }
+open class ImmutableNodeRef<D,N : Node<D>>(private val fromNode: N, private val toNode: N) : NodeRef<D,N> {
+    override fun from(): N = fromNode
+    override fun to(): N = toNode
 }

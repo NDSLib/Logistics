@@ -1,21 +1,19 @@
 package com.github.NDSLib.logistics.map
 
-import com.github.NDSLib.logistics.node.MutableNode
+import com.github.NDSLib.logistics.node.Node
 
-class MutableMapBuilder {
-    private val start = BuildNode()
+class MutableMapBuilder<N : Node<D>,D> {
+    private var start: N? = null
 
-    fun startNode() = start
-
-    fun build(): MutableMap {
-        return MutableMap().also { it.addNode(start) }
+    fun startNode(startNode: N) {
+        this.start = startNode
     }
 
-    class BuildNode : MutableNode() {
-        fun chain(): BuildNode {
-            val node = BuildNode()
-            this.chain(node)
-            return node
+    fun build(): MutableMap<D,N> {
+        if (start == null) {
+            throw IllegalArgumentException("Start node is not set")
+        } else {
+            return MutableMap<D,N>().also { it.addNode(start!!) }
         }
     }
 }

@@ -6,8 +6,19 @@ import com.github.NDSLib.logistics.node.NodeRef
 /**
  * This class express the path from one node to another node.
  */
-interface Path {
-    fun startNode(): Node
-    fun endNode(): Node
-    fun path(): List<NodeRef>
+interface Path<D,N : Node<D>> {
+    /**
+     * Get the node at the start of the path.
+     */
+    fun startNode(): N
+
+    /**
+     * Get the node at the end of the path.
+     */
+    fun endNode(): N
+
+    /**
+     * This path in NodeRefs.
+     */
+    fun refs(): List<NodeRef<D,N>>
 }
