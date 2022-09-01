@@ -13,6 +13,8 @@ class StackPathFinder<D, N : Node<D>> : PathFinder<D, N> {
         if (start == end) {
             return listOf(SingleNodePath(start))
         }
-        return start.chainingNodes().map { findPath(it as N, end) }.flatten().map { p -> SingleNodePath(start) + p }
+        return start.chainingNodes().map { findPath(it as N, end) }.flatten()
+            .filterNot { it.nodes().any { n -> n == start } }
+            .map { p -> SingleNodePath(start) + p }
     }
 }

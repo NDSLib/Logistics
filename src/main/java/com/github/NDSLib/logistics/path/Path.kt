@@ -18,7 +18,7 @@ interface Path<D,N : Node<D>> {
     fun endNode(): N
 
     /**
-     * This path in NodeRefs.
+     * Get all Node in the path.
      */
-    fun refs(): List<NodeRef<D,N>>
+    fun nodes():List<N>
 }
